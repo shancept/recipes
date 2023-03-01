@@ -1,0 +1,10 @@
+{
+    "name": "shancept/recipes",
+    "type": "library",
+    "description": "Recipes for symfony",
+    "keywords": [],
+    "license": "MIT",
+    "require": {
+        "php": ">=8.0.2"
+    }
+}
