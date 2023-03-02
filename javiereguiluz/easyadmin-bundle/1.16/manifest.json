@@ -1,8 +1,0 @@
-{
-    "bundles": {
-        "JavierEguiluz\\Bundle\\EasyAdminBundle\\EasyAdminBundle": ["all"]
-    },
-    "copy-from-recipe": {
-        "config/": "%CONFIG_DIR%/"
-    }
-}

@@ -1,5 +1,0 @@
-{
-    "env": {
-        "#1": "MAILJET_DSN=mailjet://TOKEN@default?from=FROM"
-    }
-}

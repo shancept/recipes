@@ -1,5 +1,0 @@
-{
-    "bundles": {
-        "Twig\\CssInliner\\Bundle\\TwigCssInlinerBundle": ["all"]
-    }
-}

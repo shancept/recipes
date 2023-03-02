@@ -1,6 +1,0 @@
-{
-    "aliases": ["webapp"],
-    "copy-from-recipe": {
-        "config/": "%CONFIG_DIR%/"
-    }
-}

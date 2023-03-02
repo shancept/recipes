@@ -1,5 +1,0 @@
-{
-    "bundles": {
-        "Twig\\Markdown\\Bundle\\TwigMarkdownBundle": ["all"]
-    }
-}
