@@ -3,7 +3,8 @@
         "symfony/routing": {
             "manifest": {
                 "copy-from-recipe": {
-                    "config/": "%CONFIG_DIR%/"
+                    "config/": "%CONFIG_DIR%/",
+                    "src/": "%SRC_DIR%/"
                 },
                 "conflict": {
                     "symfony/framework-bundle": "<5.3"
