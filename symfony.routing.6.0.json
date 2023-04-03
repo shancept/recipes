@@ -31,12 +31,64 @@
                 "config/routes.yaml": {
                     "contents": [
                         "controllers:",
-                        "    resource: ../src/Controller/",
+                        "    resource: ../library/Controller/",
                         "    type: annotation",
                         "",
                         "kernel:",
-                        "    resource: ../src/Kernel.php",
+                        "    resource: ../library/Kernel.php",
                         "    type: annotation",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "src/Controller/PleskIndexController.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "declare(strict_types=1);",
+                        "",
+                        "namespace PleskExt\\Demo\\Controller;",
+                        "",
+                        "use Symfony\\Component\\Routing\\Annotation\\Route;",
+                        "",
+                        "class PleskIndexController",
+                        "{",
+                        "",
+                        "    public function __construct(private \\pm_Application $pleskApplication)",
+                        "    {",
+                        "    }",
+                        "",
+                        "    #[Route('/', name: 'index')]",
+                        "    public function __invoke(): void",
+                        "    {",
+                        "        $this->pleskApplication->run();",
+                        "    }",
+                        "}",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "src/Controller/TestController.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "declare(strict_types=1);",
+                        "",
+                        "namespace PleskExt\\Demo\\Controller;",
+                        "",
+                        "use Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController;",
+                        "use Symfony\\Component\\HttpFoundation\\JsonResponse;\n",
+                        "use Symfony\\Component\\Routing\\Annotation\\Route;\n",
+                        "",
+                        "class TestController extends AbstractController",
+                        "{",
+                        "",
+                        "    #[Route('/test', name: 'test')]\n",
+                        "    public function __invoke(): JsonResponse",
+                        "    {",
+                        "        return $this->json(['test' => 'test']);",
+                        "    }",
+                        "}",
                         ""
                     ],
                     "executable": false
