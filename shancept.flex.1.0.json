@@ -27,9 +27,15 @@
                         ""
                     ],
                     "executable": false
+                },
+                "run.sh": {
+                    "contents": [
+                        "ln -sf {{PWD}}/.env {{PWD}}/src/plib/.env"
+                    ],
+                    "executable": true
                 }
             },
-            "ref": "146251ae39e06a95be0fe3d13c807bcf3938b172"
+            "ref": "146251ae39e06a95be0fe3d13c807bcf3938b173"
         }
     }
 }
