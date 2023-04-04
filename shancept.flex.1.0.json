@@ -4,9 +4,6 @@
             "manifest": {
                 "copy-from-recipe": {
                     ".env": ".env"
-                },
-                "composer-scripts": {
-                    "ln -s $PWD/.env $PWD/src/plib/.env": "script"
                 }
             },
             "files": {
