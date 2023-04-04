@@ -31,7 +31,9 @@
                 },
                 "run.sh": {
                     "contents": [
-                        "ln -sf {{PWD}}/.env {{PWD}}/src/plib/.env"
+                        "#!/bin/bash",
+                        "echo \"Running run.sh\",",
+                        "ln -sf .env ./src/plib/.env"
                     ],
                     "executable": true
                 }
