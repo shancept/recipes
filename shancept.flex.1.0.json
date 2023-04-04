@@ -35,16 +35,16 @@
                         "echo \"Running run.sh\"",
                         "chmod a+rwx .env",
                         "ln -sf .env ./src/plib/.env",
-                        "mkdir ./src/plib/var/cache",
+                        "mkdir -p ./src/plib/var/cache",
                         "chmod a+rwx ./src/plib/var/cache",
-                        "mkdir ./src/plib/var/log",
+                        "mkdir -p ./src/plib/var/log",
                         "chmod a+rwx ./src/plib/var/log",
                         ""
                     ],
                     "executable": true
                 }
             },
-            "ref": "146251ae39e06a95be0fe3d13c807bcf3938b176"
+            "ref": "146251ae39e06a95be0fe3d13c807bcf3938b177"
         }
     }
 }
