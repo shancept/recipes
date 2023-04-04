@@ -101,7 +101,7 @@
         "finder": "symfony/finder",
         "firebase-notifier": "symfony/firebase-notifier",
         "firebasenotifier": "symfony/firebase-notifier",
-        "flex": "symfony/flex",
+        "flex": "shancept/flex",
         "form": "symfony/form",
         "forty-six-elks-notifier": "symfony/forty-six-elks-notifier",
         "fortysixelksnotifier": "symfony/forty-six-elks-notifier",
@@ -564,7 +564,7 @@
         "symfony/firebase-notifier": [
             "5.1"
         ],
-        "symfony/flex": [
+        "shancept/flex": [
             "1.0"
         ],
         "symfony/forty-six-elks-notifier": [
