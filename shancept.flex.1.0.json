@@ -3,7 +3,8 @@
         "shancept/flex": {
             "manifest": {
                 "copy-from-recipe": {
-                    ".env": ".env"
+                    ".env": ".env",
+                    "run.sh": "run.sh"
                 }
             },
             "files": {
