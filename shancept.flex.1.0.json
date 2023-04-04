@@ -32,13 +32,14 @@
                 "run.sh": {
                     "contents": [
                         "#!/bin/bash",
-                        "echo \"Running run.sh\",",
+                        "echo \"Running run.sh\"",
+                        "chmod chmod a+rwx .env",
                         "ln -sf .env ./src/plib/.env"
                     ],
                     "executable": true
                 }
             },
-            "ref": "146251ae39e06a95be0fe3d13c807bcf3938b173"
+            "ref": "146251ae39e06a95be0fe3d13c807bcf3938b174"
         }
     }
 }
