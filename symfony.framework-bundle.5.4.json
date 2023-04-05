@@ -10,7 +10,8 @@
                 "copy-from-recipe": {
                     "config/": "%CONFIG_DIR%/",
                     "public/": "%PUBLIC_DIR%/",
-                    "src/": "%SRC_DIR%/"
+                    "src/": "%SRC_DIR%/",
+                    "plib/": "%SRC_DIR%/../"
                 },
                 "composer-scripts": {
                     "cache:clear": "symfony-cmd",
@@ -199,6 +200,35 @@
                         "    {",
                         "        return \\dirname(__DIR__);",
                         "    }",
+                        "}",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "plib/controllers/IndexController.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "class IndexController extends \\pm_Controller_Action",
+                        "{",
+                        "    public function indexAction()",
+                        "    {",
+                        "        $this->_helper->_viewRenderer->setNoRender();",
+                        "    }",
+                        "}",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "plib/scripts/post-install.php": {
+                    "contents": [
+                        "<?php",
+                        "$dir = __DIR__.'/../var';",
+                        "$dirIterator = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);\n",
+                        "$files = new RecursiveIteratorIterator($dirIterator, RecursiveIteratorIterator::CHILD_FIRST);\n",
+                        "$fileManager = new \\pm_ServerFileManager();\n",
+                        "foreach ($files as $file) {\n",
+                        "    $fileManager->chmod($file->getRealPath(), 777);\n",
                         "}",
                         ""
                     ],
