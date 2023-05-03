@@ -10,7 +10,8 @@
                 "copy-from-recipe": {
                     "config/": "%CONFIG_DIR%/",
                     "public/": "%PUBLIC_DIR%/",
-                    "src/": "%SRC_DIR%/"
+                    "src/": "%SRC_DIR%/",
+                    "plib/": "%SRC_DIR%/../"
                 },
                 "composer-scripts": {
                     "cache:clear": "symfony-cmd",
@@ -27,7 +28,7 @@
                     "/%CONFIG_DIR%/secrets/prod/prod.decrypt.private.php",
                     "/%PUBLIC_DIR%/bundles/",
                     "/%VAR_DIR%/",
-                    "/vendor/"
+                    "/src/plib/vendor"
                 ],
                 "post-install-output": [
                     "  * <fg=blue>Run</> your application:",
@@ -133,12 +134,17 @@
                         "",
                         "    # makes classes in src/ available to be used as services",
                         "    # this creates a service per class whose id is the fully-qualified class name",
-                        "    App\\:",
-                        "        resource: '../src/'",
+                        "    PleskExt\\Demo\\:",
+                        "        resource: '../library'",
                         "        exclude:",
-                        "            - '../src/DependencyInjection/'",
-                        "            - '../src/Entity/'",
-                        "            - '../src/Kernel.php'",
+                        "            - '../library/Kernel.php'",
+                        "",
+                        "    PleskExt\\Demo\\Controller\\:",
+                        "        resource: '../library/Controller'",
+                        "        tags: ['controller.service_arguments']",
+                        "",
+                        "    pm_Application:",
+                        "        class: '\\pm_Application'",
                         "",
                         "    # add more service definitions when explicit configuration is needed",
                         "    # please note that last definitions always *replace* previous ones",
@@ -149,14 +155,25 @@
                 "public/index.php": {
                     "contents": [
                         "<?php",
+                        "\\pm_Context::init('demo');",
                         "",
-                        "use App\\Kernel;",
+                        "use PleskExt\\Demo\\Kernel;",
                         "",
-                        "require_once dirname(__DIR__).'/vendor/autoload_runtime.php';",
+                        "$runtime = $_SERVER['APP_RUNTIME'] ?? $_ENV['APP_RUNTIME'] ?? 'Symfony\\\\Component\\\\Runtime\\\\SymfonyRuntime';",
+                        "$runtime = new $runtime(($_SERVER['APP_RUNTIME_OPTIONS'] ?? $_ENV['APP_RUNTIME_OPTIONS'] ?? []) + [",
+                        "        'project_dir' => dirname(__DIR__, 3).'/plib/modules/demo',",
+                        "    ]);",
                         "",
-                        "return function (array $context) {",
+                        "$app = static function (array $context) {",
                         "    return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);",
                         "};",
+                        "",
+                        "[$app, $args] = $runtime",
+                        "    ->getResolver($app)",
+                        "    ->resolve();",
+                        "$app = $app(...$args);",
+                        "",
+                        "exit($runtime->getRunner($app)->run());",
                         ""
                     ],
                     "executable": false
@@ -171,7 +188,7 @@
                     "contents": [
                         "<?php",
                         "",
-                        "namespace App;",
+                        "namespace PleskExt\\Demo;",
                         "",
                         "use Symfony\\Bundle\\FrameworkBundle\\Kernel\\MicroKernelTrait;",
                         "use Symfony\\Component\\HttpKernel\\Kernel as BaseKernel;",
@@ -179,6 +196,40 @@
                         "class Kernel extends BaseKernel",
                         "{",
                         "    use MicroKernelTrait;",
+                        "",
+                        "    public function getProjectDir(): string",
+                        "    {",
+                        "        return \\dirname(__DIR__);",
+                        "    }",
+                        "}",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "plib/controllers/IndexController.php": {
+                    "contents": [
+                        "<?php",
+                        "",
+                        "class IndexController extends \\pm_Controller_Action",
+                        "{",
+                        "    public function indexAction()",
+                        "    {",
+                        "        $this->_helper->_viewRenderer->setNoRender();",
+                        "    }",
+                        "}",
+                        ""
+                    ],
+                    "executable": false
+                },
+                "plib/scripts/post-install.php": {
+                    "contents": [
+                        "<?php",
+                        "$dir = __DIR__.'/../var';",
+                        "$dirIterator = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);\n",
+                        "$files = new RecursiveIteratorIterator($dirIterator, RecursiveIteratorIterator::CHILD_FIRST);\n",
+                        "$fileManager = new \\pm_ServerFileManager();\n",
+                        "foreach ($files as $file) {\n",
+                        "    $fileManager->chmod($file->getRealPath(), 777);\n",
                         "}",
                         ""
                     ],
